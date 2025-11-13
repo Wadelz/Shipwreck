@@ -40,7 +40,7 @@ git clone https://github.com/YOUR-USERNAME/Shipwreck.git
 cd Shipwreck
 
 # Add upstream remote
-git remote add upstream https://github.com/ORIGINAL-OWNER/Shipwreck.git
+git remote add upstream https://github.com/Wadelz/Shipwreck.git
 ```
 
 ### 2. Set Up Development Environment
@@ -491,8 +491,8 @@ texture.loadFromFile(GameConstants::Assets::NEW_TEXTURE);
 
 ## Questions?
 
-- Open a [Discussion](https://github.com/yourusername/Shipwreck/discussions)
-- Check existing [Issues](https://github.com/yourusername/Shipwreck/issues)
+- Open a [Discussion](https://github.com/Wadelz/Shipwreck/discussions)
+- Check existing [Issues](https://github.com/Wadelz/Shipwreck/issues)
 - Read the [README](../README.md) and [BUILDING.md](BUILDING.md)
 
 ---

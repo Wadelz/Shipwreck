@@ -68,14 +68,14 @@ For detailed build instructions, see [BUILDING.md](docs/BUILDING.md).
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/Shipwreck.git
+git clone https://github.com/Wadelz/Shipwreck.git
 cd Shipwreck
 
 # Create build directory
 mkdir build && cd build
 
 # Configure and build
-cmake ..
+cmake .. -DCMAKE_BUILD_TYPE=Release
 cmake --build .
 
 # Run the game
@@ -85,11 +85,11 @@ cmake --build .
 
 #### Using Visual Studio (Windows)
 
-```bash
-# Open Shipwreck.sln in Visual Studio
-# Select your configuration (Debug/Release, Win32/x64)
-# Press F5 to build and run
-```
+1. Open `Shipwreck.sln` in Visual Studio
+2. Select configuration: **Release** and **x64** (recommended)
+3. Press **F5** to build and run
+
+The project is pre-configured for C++17 and includes all dependencies.
 
 ### Prerequisites
 
@@ -332,8 +332,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Contact
 
-- Project Repository: [https://github.com/yourusername/Shipwreck](https://github.com/yourusername/Shipwreck)
-- Issue Tracker: [https://github.com/yourusername/Shipwreck/issues](https://github.com/yourusername/Shipwreck/issues)
+- Project Repository: [https://github.com/Wadelz/Shipwreck](https://github.com/Wadelz/Shipwreck)
+- Issue Tracker: [https://github.com/Wadelz/Shipwreck/issues](https://github.com/Wadelz/Shipwreck/issues)
 
 ---
 

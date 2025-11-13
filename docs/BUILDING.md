@@ -67,65 +67,76 @@ This is the recommended method for Windows development.
 #### Step 1: Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/Shipwreck.git
+git clone https://github.com/Wadelz/Shipwreck.git
 cd Shipwreck
 ```
 
 #### Step 2: Open in Visual Studio
 
-1. Open `Shipwreck.sln` in Visual Studio
+1. Double-click `Shipwreck.sln` to open in Visual Studio
 2. Select your desired configuration:
-   - **Debug** or **Release**
+   - **Release** (recommended) or **Debug**
    - **x64** (recommended) or **Win32**
+
+The project is pre-configured for **C++17**, so no additional setup is needed.
 
 #### Step 3: Build
 
-- Press `F7` or select **Build > Build Solution**
+- Press **F7** or select **Build > Build Solution**
 - The executable will be created in `Shipwreck/x64/Debug/` or `Shipwreck/x64/Release/`
 
 #### Step 4: Run
 
-- Press `F5` to run with debugging
-- Or `Ctrl+F5` to run without debugging
-- The necessary DLLs will be copied automatically to the output directory
+- Press **F5** to run with debugging
+- Or **Ctrl+F5** to run without debugging
+- The necessary DLLs and assets are automatically copied to the output directory via post-build events
 
 ### Using CMake with Visual Studio
 
-For a more modern build experience:
+For a more modern, CMake-based build experience:
 
 #### Step 1: Generate Visual Studio Project
 
 ```bash
 # Clone repository
-git clone https://github.com/yourusername/Shipwreck.git
+git clone https://github.com/Wadelz/Shipwreck.git
 cd Shipwreck
 
 # Create build directory
 mkdir build
 cd build
 
-# Generate Visual Studio project
-cmake .. -G "Visual Studio 16 2019" -A x64
+# Generate Visual Studio project (VS 2019)
+cmake .. -G "Visual Studio 16 2019" -A x64 -DCMAKE_BUILD_TYPE=Release
 
 # Or for Visual Studio 2022
-cmake .. -G "Visual Studio 17 2022" -A x64
+cmake .. -G "Visual Studio 17 2022" -A x64 -DCMAKE_BUILD_TYPE=Release
 ```
+
+CMake automatically:
+- Sets C++17 standard
+- Finds bundled SFML libraries
+- Configures include paths
+- Sets up post-build asset copying
 
 #### Step 2: Build
 
 ```bash
-# Build from command line
+# Build from command line (recommended)
 cmake --build . --config Release
 
-# Or open the generated solution
+# Or open the generated solution in Visual Studio
 start Shipwreck.sln
 ```
 
 #### Step 3: Run
 
 ```bash
+# Navigate to output directory
 cd bin
-./Shipwreck.exe
+
+# Run the game
+Shipwreck.exe
 ```
 
 ### Using MinGW
@@ -134,31 +145,36 @@ If you prefer GCC on Windows:
 
 ```bash
 # Clone repository
-git clone https://github.com/yourusername/Shipwreck.git
+git clone https://github.com/Wadelz/Shipwreck.git
 cd Shipwreck
 
 # Create build directory
 mkdir build
 cd build
 
-# Configure with MinGW
+# Configure with MinGW Makefiles
 cmake .. -G "MinGW Makefiles" -DCMAKE_BUILD_TYPE=Release
 
-# Build
-cmake --build .
+# Build with all CPU cores
+cmake --build . -j%NUMBER_OF_PROCESSORS%
 
-# Run
+# Run the game
 cd bin
-./Shipwreck.exe
+Shipwreck.exe
 ```
+
+**Note**: The bundled SFML library works with MinGW/GCC compilers.
 
 ## Building on Linux
 
-### Using System SFML
+### Using System SFML (Recommended)
 
 ```bash
+# Install SFML first (see Prerequisites section)
+# Ubuntu/Debian: sudo apt-get install libsfml-dev
+
 # Clone repository
-git clone https://github.com/yourusername/Shipwreck.git
+git clone https://github.com/Wadelz/Shipwreck.git
 cd Shipwreck
 
 # Create build directory
@@ -167,10 +183,10 @@ mkdir build && cd build
 # Configure (using system SFML)
 cmake .. -DUSE_BUNDLED_SFML=OFF -DCMAKE_BUILD_TYPE=Release
 
-# Build (use all CPU cores)
+# Build using all CPU cores
 cmake --build . -j$(nproc)
 
-# Run
+# Run the game
 ./bin/Shipwreck
 ```
 
@@ -206,35 +222,39 @@ cmake --install .
 
 ## Building on macOS
 
-### Using Homebrew SFML
+### Using Homebrew SFML (Recommended)
 
 ```bash
-# Install dependencies
+# Step 1: Install dependencies via Homebrew
 brew install sfml cmake
 
-# Clone repository
-git clone https://github.com/yourusername/Shipwreck.git
+# Step 2: Clone repository
+git clone https://github.com/Wadelz/Shipwreck.git
 cd Shipwreck
 
-# Create build directory
+# Step 3: Create build directory
 mkdir build && cd build
 
-# Configure
+# Step 4: Configure CMake (using system SFML)
 cmake .. -DUSE_BUNDLED_SFML=OFF -DCMAKE_BUILD_TYPE=Release
 
-# Build
+# Step 5: Build using all CPU cores
 cmake --build . -j$(sysctl -n hw.ncpu)
 
-# Run
+# Step 6: Run the game
 ./bin/Shipwreck
 ```
 
 ### Creating an App Bundle (Optional)
 
+CMake can create a macOS `.app` bundle for easier distribution:
+
 ```bash
-# The CMake configuration creates a .app bundle automatically
+# The CMake configuration automatically creates an app bundle
 # Find it in the build/bin directory
 open bin/Shipwreck.app
+
+# Or double-click Shipwreck.app in Finder
 ```
 
 ## Build Configuration
@@ -381,13 +401,14 @@ Check that:
 
 If you encounter issues not covered here:
 
-1. Check the [GitHub Issues](https://github.com/yourusername/Shipwreck/issues)
+1. Check the [GitHub Issues](https://github.com/Wadelz/Shipwreck/issues)
 2. Search for similar problems
 3. Create a new issue with:
    - Your operating system and version
-   - Compiler and version
-   - Full error message
+   - Compiler and version (`gcc --version`, `clang --version`, or Visual Studio version)
+   - Full error message (copy the entire output)
    - Build command used
+   - Whether you're using bundled or system SFML
 
 ## Development Builds
 
@@ -428,6 +449,36 @@ cmake --build .
 2. CLion auto-configures
 3. Press `Ctrl+F9` to build
 
+## Creating Distribution Packages
+
+Ready to distribute your build? Use the automated packaging scripts:
+
+### Windows Package
+
+```bash
+cd scripts
+package.bat
+```
+
+Creates:
+- `dist/Shipwreck-v{version}-Windows-x64.zip`
+- Includes executable, DLLs, assets, and documentation
+- Ready for distribution
+
+### Linux/macOS Package
+
+```bash
+cd scripts
+./package.sh
+```
+
+Creates:
+- Linux: `dist/Shipwreck-v{version}-Linux-x64.tar.gz`
+- macOS: `dist/Shipwreck-v{version}-macOS-x64.zip`
+- Includes SHA256 checksums
+
+See [scripts/README.md](../scripts/README.md) for detailed packaging documentation.
+
 ## Next Steps
 
 After building successfully:
@@ -435,5 +486,6 @@ After building successfully:
 - Read the [main README](../README.md) for gameplay instructions
 - Check [CONTRIBUTING.md](CONTRIBUTING.md) for development guidelines
 - Explore the source code in `Shipwreck/src/`
+- Create distribution packages using scripts in `scripts/`
 
 Happy building! 🔨
