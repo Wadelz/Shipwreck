@@ -15,12 +15,13 @@ option(USE_BUNDLED_SFML "Use bundled SFML library" ON)
 
 # Find SFML
 if(USE_BUNDLED_SFML)
-    # Use bundled SFML
-    set(SFML_DIR "${CMAKE_SOURCE_DIR}/Shipwreck/external/SFML/lib/cmake/SFML")
-    find_package(SFML 2.5 COMPONENTS system window graphics network audio REQUIRED)
+    # Use bundled SFML - set as cache variable so CMake finds it
+    set(SFML_DIR "${CMAKE_SOURCE_DIR}/Shipwreck/external/SFML/lib/cmake/SFML" CACHE PATH "SFML directory")
+    message(STATUS "Using bundled SFML from: ${SFML_DIR}")
+    find_package(SFML 2 COMPONENTS system window graphics network audio REQUIRED)
 else()
     # Use system SFML
-    find_package(SFML 2.5 COMPONENTS system window graphics network audio REQUIRED)
+    find_package(SFML 2 COMPONENTS system window graphics network audio REQUIRED)
 endif()
 
 # Collect source files
