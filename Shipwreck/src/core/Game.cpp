@@ -73,13 +73,13 @@ bool Game::initializeUI() {
     hud.setFont(font);
     hud.setCharacterSize(HUD_TEXT_SIZE);
     hud.setFillColor(sf::Color::White);
-    hud.setPosition(0, 0);
+    hud.setPosition(sf::Vector2f(0, 0));
 
     // Setup completion text
     complete.setFont(font);
     complete.setCharacterSize(COMPLETE_TEXT_SIZE);
     complete.setFillColor(sf::Color::White);
-    complete.setPosition(0, WINDOW_HEIGHT / 2.0f);
+    complete.setPosition(sf::Vector2f(0, WINDOW_HEIGHT / 2.0f));
 
     return true;
 }
