@@ -6,7 +6,10 @@ EasterBall::EasterBall(float startX, float startY)
     position.x = startX;
     position.y = startY;
 
-    b_Texture.loadFromFile("assets/textures/easterBeachBall.png");
+    if (!b_Texture.loadFromFile("assets/textures/easterBeachBall.png")) {
+        // Failed to load texture — runtime environment may not have assets mounted
+        // Continue with default/empty texture to avoid crashing; application will log elsewhere.
+    }
     ballShape.setTexture(&b_Texture);
     ballShape.setSize(sf::Vector2f(100, 100));
     ballShape.setPosition(position);

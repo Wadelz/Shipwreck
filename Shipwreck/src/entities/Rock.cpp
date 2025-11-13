@@ -7,7 +7,9 @@ Rock::Rock(float rockX, float rockY)
     position.x = rockX;
     position.y = rockY;
 
-    r_Texture.loadFromFile("assets/textures/Rock2_1.png");
+    if (!r_Texture.loadFromFile("assets/textures/Rock2_1.png")) {
+        // texture load failed; proceed without texture to avoid warning/crash
+    }
     rockShape.setTexture(&r_Texture);
     rockShape.setSize(sf::Vector2f(100, 100));
     rockShape.setPosition(position);
@@ -17,7 +19,9 @@ Rock::Rock(float rockX, float rockY)
     safeZone.setPosition(position + (sf::Vector2f(15, 75)));
 
     //overlay
-    o_Texture.loadFromFile("assets/textures/WaveFade.png");
+    if (!o_Texture.loadFromFile("assets/textures/WaveFade.png")) {
+        // overlay texture failed to load
+    }
     overlay.setTexture(&o_Texture);
     overlay.setSize(sf::Vector2f(95, 768));
     overlay.setFillColor(sf::Color(26, 128, 182, 255));

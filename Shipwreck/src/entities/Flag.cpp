@@ -9,7 +9,9 @@ Flag::Flag(float startX, float startY)
     position.y = startY;
 
     // Setting texture, size and position for flags
-    f_texture.loadFromFile("assets/textures/Flag2k.png");
+    if (!f_texture.loadFromFile("assets/textures/Flag2k.png")) {
+        // flag texture failed to load
+    }
     flagShape.setTexture(&f_texture);
     flagShape.setSize(sf::Vector2f(6400, 100));
     flagShape.setPosition(position);

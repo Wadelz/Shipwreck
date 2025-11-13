@@ -6,7 +6,9 @@ Survivor::Survivor(float startX, float startY)
     position.x = startX;
     position.y = startY;
 
-    s_Texture.loadFromFile("assets/textures/head.png");
+    if (!s_Texture.loadFromFile("assets/textures/head.png")) {
+        // survivor head texture failed to load
+    }
     survivorShape.setTexture(&s_Texture);
     survivorShape.setSize(sf::Vector2f(50, 50));
     survivorShape.setPosition(position);

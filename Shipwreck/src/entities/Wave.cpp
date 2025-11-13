@@ -7,7 +7,9 @@ Wave::Wave(float startX, float startY)
     position.x = startX;
     position.y = startY;
 
-    w_texture.loadFromFile("assets/textures/WavesHalf.png");
+    if (!w_texture.loadFromFile("assets/textures/WavesHalf.png")) {
+        // wave texture failed to load
+    }
     waveShape.setTexture(&w_texture);
     waveShape.setSize(sf::Vector2f(5000, 100));
     waveShape.setPosition(position);

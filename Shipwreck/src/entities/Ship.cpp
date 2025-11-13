@@ -13,7 +13,9 @@ Ship::Ship(float startX, float startY)
 
 
     //visable ship
-    s_Texture.loadFromFile("assets/textures/RowBoatC.png");
+    if (!s_Texture.loadFromFile("assets/textures/RowBoatC.png")) {
+        // boat texture failed to load
+    }
     s_Sprite.setTexture(s_Texture);
     s_Sprite.setPosition(position);
     s_Sprite.setScale(sf::Vector2f(0.2, 0.2));
