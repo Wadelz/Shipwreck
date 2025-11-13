@@ -4,6 +4,9 @@ REM This script helps set up the development environment
 
 setlocal enabledelayedexpansion
 
+REM Navigate to project root
+cd ..
+
 echo ========================================
 echo Shipwreck Development Setup
 echo ========================================

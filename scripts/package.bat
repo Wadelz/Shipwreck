@@ -9,6 +9,9 @@ echo Shipwreck Release Packaging Script
 echo ========================================
 echo.
 
+REM Navigate to project root
+cd ..
+
 REM Get version from git tag or use default
 for /f "tokens=*" %%i in ('git describe --tags --abbrev=0 2^>nul') do set VERSION=%%i
 if "%VERSION%"=="" set VERSION=v1.0.0
