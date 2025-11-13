@@ -52,16 +52,11 @@ Your pirate crew has gone overboard due to rough waters just offshore. Take cont
 
 ## Installation
 
-### Windows (Pre-built)
+**Currently, Shipwreck must be built from source.** Pre-built releases will be available in the future.
 
-1. Download the latest release from the Releases page
-2. Extract the ZIP file
-3. Run `Shipwreck.exe`
-4. Ensure all DLL files are in the same directory as the executable
+See [Building from Source](#building-from-source) for instructions on all platforms.
 
-### Linux / macOS
-
-Currently, you need to build from source. See [Building from Source](#building-from-source).
+> **Note**: Once releases are available, Windows users will be able to download pre-built binaries from the [Releases page](https://github.com/Wadelz/Shipwreck/releases).
 
 ## Building from Source
 
@@ -259,6 +254,43 @@ All dependencies are included in the repository for Windows builds.
 - [ ] Configuration file for custom settings
 - [ ] More survivor types with different behaviors
 - [ ] Additional obstacles and hazards
+
+## Packaging and Distribution
+
+Ready to create a release? The project includes automated packaging scripts.
+
+### Creating Release Packages
+
+**Windows:**
+```batch
+cd scripts
+package.bat
+```
+
+**Linux/macOS:**
+```bash
+cd scripts
+./package.sh
+```
+
+These scripts automatically:
+- Build the project in Release mode
+- Package all necessary files (executable, DLLs, assets)
+- Create a distributable archive (ZIP/tar.gz)
+- Generate checksums (Linux/macOS)
+- Include quick start documentation
+
+Output is placed in the `dist/` directory.
+
+### Development Setup
+
+For first-time setup on Windows:
+```batch
+cd scripts
+setup.bat
+```
+
+See [scripts/README.md](scripts/README.md) for detailed packaging instructions and troubleshooting.
 
 ## Contributing
 
