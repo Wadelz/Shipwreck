@@ -13,48 +13,69 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Source Files\core">
+      <UniqueIdentifier>{8A123456-B789-4CDE-F012-34567890ABCD}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\entities">
+      <UniqueIdentifier>{9B234567-C890-4DEF-0123-456789ABCDEF}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\core">
+      <UniqueIdentifier>{AC345678-D901-4EF0-1234-56789ABCDEF0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\entities">
+      <UniqueIdentifier>{BD456789-E012-4F01-2345-6789ABCDEF01}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Main.cpp">
+    <ClCompile Include="src\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Ball.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\core\Game.cpp">
+      <Filter>Source Files\core</Filter>
     </ClCompile>
-    <ClCompile Include="Flag.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\entities\Ball.cpp">
+      <Filter>Source Files\entities</Filter>
     </ClCompile>
-    <ClCompile Include="Rock.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\entities\Flag.cpp">
+      <Filter>Source Files\entities</Filter>
     </ClCompile>
-    <ClCompile Include="Ship.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\entities\Rock.cpp">
+      <Filter>Source Files\entities</Filter>
     </ClCompile>
-    <ClCompile Include="Survivor.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\entities\Ship.cpp">
+      <Filter>Source Files\entities</Filter>
     </ClCompile>
-    <ClCompile Include="Wave.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\entities\Survivor.cpp">
+      <Filter>Source Files\entities</Filter>
+    </ClCompile>
+    <ClCompile Include="src\entities\Wave.cpp">
+      <Filter>Source Files\entities</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="easterBall.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\core\Constants.h">
+      <Filter>Header Files\core</Filter>
     </ClInclude>
-    <ClInclude Include="flag.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\core\Game.h">
+      <Filter>Header Files\core</Filter>
     </ClInclude>
-    <ClInclude Include="rock.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\entities\Ball.h">
+      <Filter>Header Files\entities</Filter>
     </ClInclude>
-    <ClInclude Include="ship.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\entities\Flag.h">
+      <Filter>Header Files\entities</Filter>
     </ClInclude>
-    <ClInclude Include="survivor.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\entities\Rock.h">
+      <Filter>Header Files\entities</Filter>
     </ClInclude>
-    <ClInclude Include="wave.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\entities\Ship.h">
+      <Filter>Header Files\entities</Filter>
+    </ClInclude>
+    <ClInclude Include="src\entities\Survivor.h">
+      <Filter>Header Files\entities</Filter>
+    </ClInclude>
+    <ClInclude Include="src\entities\Wave.h">
+      <Filter>Header Files\entities</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

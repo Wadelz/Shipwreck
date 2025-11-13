@@ -82,3 +82,54 @@ ipch/
 
 # Archives (if they're temporary)
 *.zip
+
+# CMake
+build/
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+*.cmake
+!CMakeLists.txt
+*.ninja
+.ninja_deps
+.ninja_log
+
+# IDE-specific
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Thumbnails
+._*
+
+# Linux
+*~
+
+# Backup files
+*.bak
+*.backup
+
+# Old project structure (if cleaning up)
+Shipwreck/Main.cpp
+Shipwreck/*.h
+Shipwreck/*.cpp
+Shipwreck/Ball.cpp
+Shipwreck/Flag.cpp
+Shipwreck/Rock.cpp
+Shipwreck/Ship.cpp
+Shipwreck/Survivor.cpp
+Shipwreck/Wave.cpp
+Shipwreck/ship.h
+Shipwreck/wave.h
+Shipwreck/rock.h
+Shipwreck/flag.h
+Shipwreck/survivor.h
+Shipwreck/easterBall.h
