@@ -10,8 +10,10 @@ Creates a distributable Windows release package with executable, DLLs, assets, a
 
 **Requirements:**
 - Windows
-- Visual Studio 2019+ with CMake support
+- Visual Studio 2019+ with C++ development tools
 - Git (for version detection)
+- **Note:** The script uses MSBuild and the existing Visual Studio project files (.vcxproj).
+  The bundled SFML in the repository is for MinGW/GCC and won't work with Visual Studio/MSVC.
 
 **Usage:**
 ```batch

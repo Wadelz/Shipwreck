@@ -19,49 +19,80 @@ set VERSION=%VERSION:~1%
 echo Version: %VERSION%
 
 REM Configuration
-set BUILD_DIR=build
 set DIST_DIR=dist
 set PACKAGE_NAME=Shipwreck-v%VERSION%-Windows-x64
 set PACKAGE_DIR=%DIST_DIR%\%PACKAGE_NAME%
+set BUILD_CONFIG=Release
+set BUILD_PLATFORM=x64
 
 echo.
 echo Step 1: Cleaning previous builds...
-if exist "%BUILD_DIR%" rmdir /s /q "%BUILD_DIR%"
 if exist "%DIST_DIR%" rmdir /s /q "%DIST_DIR%"
+if exist "Shipwreck\x64\%BUILD_CONFIG%" rmdir /s /q "Shipwreck\x64\%BUILD_CONFIG%"
 
-echo Step 2: Creating build directory...
-mkdir "%BUILD_DIR%"
-cd "%BUILD_DIR%"
+echo Step 2: Locating MSBuild...
+REM Try to find MSBuild
+set MSBUILD=""
 
-echo.
-echo Step 3: Configuring CMake (Release mode)...
-cmake .. -G "Visual Studio 17 2022" -A x64
-if errorlevel 1 (
-    echo ERROR: CMake configuration failed!
-    cd ..
+REM Check for VS 2022
+if exist "C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe" (
+    set MSBUILD="C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe"
+    echo Found Visual Studio 2022 Community
+) else if exist "C:\Program Files\Microsoft Visual Studio\2022\Professional\MSBuild\Current\Bin\MSBuild.exe" (
+    set MSBUILD="C:\Program Files\Microsoft Visual Studio\2022\Professional\MSBuild\Current\Bin\MSBuild.exe"
+    echo Found Visual Studio 2022 Professional
+) else if exist "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\MSBuild\Current\Bin\MSBuild.exe" (
+    set MSBUILD="C:\Program Files\Microsoft Visual Studio\2022\Enterprise\MSBuild\Current\Bin\MSBuild.exe"
+    echo Found Visual Studio 2022 Enterprise
+)
+
+REM Check for VS 2019
+if %MSBUILD%=="" (
+    if exist "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe" (
+        set MSBUILD="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe"
+        echo Found Visual Studio 2019 Community
+    ) else if exist "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\MSBuild.exe" (
+        set MSBUILD="C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\MSBuild.exe"
+        echo Found Visual Studio 2019 Professional
+    ) else if exist "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\MSBuild.exe" (
+        set MSBUILD="C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\MSBuild.exe"
+        echo Found Visual Studio 2019 Enterprise
+    )
+)
+
+if %MSBUILD%=="" (
+    echo ERROR: MSBuild not found!
+    echo Please install Visual Studio 2019 or 2022 with C++ development tools.
+    echo.
+    pause
     exit /b 1
 )
 
 echo.
-echo Step 4: Building project (Release)...
-cmake --build . --config Release
+echo Step 3: Building project (Release x64)...
+%MSBUILD% "Shipwreck\Shipwreck.vcxproj" /p:Configuration=%BUILD_CONFIG% /p:Platform=%BUILD_PLATFORM% /t:Rebuild /v:minimal /nologo
 if errorlevel 1 (
-    echo ERROR: Build failed!
-    cd ..
+    echo.
+    echo ERROR: Build failed! Check the output above for errors.
+    echo.
+    echo Common issues:
+    echo - SFML not installed or not found
+    echo - Missing Visual Studio C++ components
+    echo.
+    pause
     exit /b 1
 )
 
-cd ..
-
 echo.
-echo Step 5: Creating distribution package...
+echo Step 4: Creating distribution package...
 mkdir "%DIST_DIR%"
 mkdir "%PACKAGE_DIR%"
 
 echo Copying executable...
-copy "%BUILD_DIR%\bin\Release\Shipwreck.exe" "%PACKAGE_DIR%\" >nul
+copy "Shipwreck\x64\%BUILD_CONFIG%\Shipwreck.exe" "%PACKAGE_DIR%\" >nul
 if errorlevel 1 (
     echo ERROR: Failed to copy executable!
+    echo Make sure the build succeeded and check: Shipwreck\x64\%BUILD_CONFIG%\Shipwreck.exe
     exit /b 1
 )
 
@@ -114,7 +145,7 @@ echo Creating README-RELEASE.txt...
 ) > "%PACKAGE_DIR%\README-RELEASE.txt"
 
 echo.
-echo Step 6: Creating ZIP archive...
+echo Step 5: Creating ZIP archive...
 powershell -command "Compress-Archive -Path '%PACKAGE_DIR%' -DestinationPath '%DIST_DIR%\%PACKAGE_NAME%.zip' -Force"
 if errorlevel 1 (
     echo ERROR: Failed to create ZIP archive!
