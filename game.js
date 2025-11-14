@@ -320,8 +320,9 @@ class GameScene extends Phaser.Scene {
         this.waves.forEach(wave => {
             wave.y += wave.getData('speed');
 
-            // Reset wave to top when it goes off bottom
-            if (wave.y > 800) {
+            // Reset wave to top when it reaches the bottom rocks (safe zone)
+            // Bottom rocks are at y=500, so stop waves at y=550 to create safe area
+            if (wave.y > 550) {
                 wave.y = -40;
             }
         });
